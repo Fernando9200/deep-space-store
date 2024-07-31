@@ -1,0 +1,13 @@
+{
+    "offers": [
+      {
+        "id": "123",
+        "name": "Miniature of the Enterprise",
+        "price": 500.00,
+        "items": ["Miniature", "Stand"],
+        "paymentMethods": ["Boleto", "Credit Card", "Credit", "Pix"],
+        "images": ["image_url"]
+      }
+    ]
+  }
+  
