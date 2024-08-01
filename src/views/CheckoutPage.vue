@@ -1,27 +1,59 @@
 <template>
-    <div>
-      <h1>{{ offer.name }}</h1>
-      <p>Price: {{ offer.price }}</p>
-      <checkout-form></checkout-form>
-    </div>
-  </template>
-  
-  <script>
-  import CheckoutForm from '../components/CheckoutForm.vue';
-  
-  export default {
-    name: 'CheckoutPage',
-    components: {
-      CheckoutForm
-    },
-    computed: {
-      offer() {
-        return this.$store.getters.offer;
-      }
-    },
-    created() {
-      this.$store.dispatch('fetchOffer', this.$route.params.offerCode);
+  <v-container>
+    <v-stepper v-model="stepIndex" non-linear>
+
+      <!-- Stepper Content -->
+      <v-stepper-items>
+        <v-stepper-content
+          v-for="(step, index) in steps"
+          :key="index"
+          :step="index"
+          v-show="stepIndex === index"
+        >
+          <component
+            :is="getComponentForStep(step)"
+            @next="nextStep"
+            @prev="prevStep"
+          />
+        </v-stepper-content>
+      </v-stepper-items>
+    </v-stepper>
+  </v-container>
+</template>
+
+<script>
+import PersonalDetails from '../components/PersonalDetails.vue';
+import DeliveryDetails from '../components/DeliveryDetails.vue';
+import PaymentDetails from '../components/PaymentDetails.vue';
+import Confirmation from '../components/Confirmation.vue';
+import { mapGetters, mapMutations } from 'vuex';
+
+export default {
+  name: 'CheckoutPage',
+  computed: {
+    ...mapGetters(['stepIndex']),
+    steps() {
+      return ['Personal Details', 'Delivery Details', 'Payment Details', 'Confirmation'];
     }
-  };
-  </script>
-  
+  },
+  methods: {
+    ...mapMutations(['nextStep', 'prevStep']),
+    getComponentForStep(step) {
+      switch (step) {
+        case 'Personal Details':
+          return PersonalDetails;
+        case 'Delivery Details':
+          return DeliveryDetails;
+        case 'Payment Details':
+          return PaymentDetails;
+        case 'Confirmation':
+          return Confirmation;
+      }
+    }
+  }
+};
+</script>
+
+<style scoped>
+/* Optionally add styles for the stepper */
+</style>

@@ -1,27 +1,31 @@
 <template>
-  <div>
-    <h1>Thank You for Your Order!</h1>
-    <p>Order ID: {{ order.orderId }}</p>
-    <div v-if="order.paymentDetails.code">
-      <p>Payment Code: {{ order.paymentDetails.code }}</p>
-    </div>
-    <div v-else>
-      <p>{{ order.paymentDetails.status }}</p>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-card>
+          <v-card-title>Thank You for Your Order!</v-card-title>
+          <v-card-text>
+            <p>Order ID: {{ order.orderId }}</p>
+            <div v-if="order.paymentDetails.code">
+              <p>Payment Code: {{ order.paymentDetails.code }}</p>
+            </div>
+            <div v-else>
+              <p>{{ order.paymentDetails.status }}</p>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'ThankYouPage',
   computed: {
-    order() {
-      return this.$store.getters.order;
-    }
+    ...mapGetters(['order'])
   }
 };
 </script>
-
-<style scoped>
-/* Your style code here */
-</style>
