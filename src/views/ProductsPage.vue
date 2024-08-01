@@ -17,6 +17,7 @@
                     <v-card-subtitle>Price: ${{ item.price }}</v-card-subtitle>
                     <v-card-actions>
                       <v-btn @click="addToCart(item)">Add to Cart</v-btn>
+                      <v-btn color="primary" @click="buyNow(item)">Buy Now</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-col>
@@ -29,23 +30,28 @@
   </template>
   
   <script>
-  import { mapActions, mapGetters } from 'vuex';
+  import { mapActions } from 'vuex';
   
   export default {
     name: 'ProductsPage',
     computed: {
-      ...mapGetters(['offer']),
       offerItems() {
-        return this.offer.items || [];
+        return this.$store.getters.offer.items || [];
       }
     },
     created() {
-      this.fetchOffer('default-offer-code');
+      this.$store.dispatch('fetchOffer', 'default-offer-code');
     },
     methods: {
       ...mapActions(['fetchOffer']),
       addToCart(item) {
         this.$store.commit('addToCart', item);
+      },
+      buyNow(item) {
+        // Set only the selected item for checkout
+        this.$store.commit('setCheckoutItem', item);
+        // Ensure offerCode is passed correctly
+        this.$router.push({ name: 'checkout', params: { offerCode: 'default-offer-code' } });
       }
     }
   };

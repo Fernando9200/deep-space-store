@@ -2,13 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router';
 import CheckoutPage from './views/CheckoutPage.vue';
 import ThankYouPage from './views/ThankYouPage.vue';
 import CartPage from './views/CartPage.vue';
-import ProductsPage from './views/ProductsPage.vue'; // Import the ProductsPage
+import ProductsPage from './views/ProductsPage.vue';
 
 const routes = [
   {
     path: '/',
     name: 'products',
-    component: ProductsPage // Default route to ProductsPage
+    component: ProductsPage
   },
   {
     path: '/cart',
@@ -16,9 +16,10 @@ const routes = [
     component: CartPage
   },
   {
-    path: '/checkout/:step',
+    path: '/checkout/:offerCode', // Ensure this expects :offerCode
     name: 'checkout',
-    component: CheckoutPage
+    component: CheckoutPage,
+    props: true // Pass route params as props
   },
   {
     path: '/thank-you',

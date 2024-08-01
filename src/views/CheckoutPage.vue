@@ -1,6 +1,18 @@
 <template>
   <v-container>
-    <v-stepper v-model="stepIndex" non-linear>
+    <v-stepper v-model="stepIndex">
+      <!-- Stepper Header -->
+      <v-stepper-header>
+        <v-stepper-step
+          v-for="(step, index) in steps"
+          :key="index"
+          :complete="stepIndex > index"
+          :step="index"
+        >
+          {{ step }}
+        </v-stepper-step>
+        <v-divider></v-divider>
+      </v-stepper-header>
 
       <!-- Stepper Content -->
       <v-stepper-items>
@@ -30,10 +42,16 @@ import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'CheckoutPage',
+  props: ['offerCode'],
   computed: {
-    ...mapGetters(['stepIndex']),
+    ...mapGetters(['stepIndex', 'checkoutItem', 'offer']),
     steps() {
       return ['Personal Details', 'Delivery Details', 'Payment Details', 'Confirmation'];
+    }
+  },
+  created() {
+    if (this.offerCode) {
+      this.$store.dispatch('fetchOffer', this.offerCode);
     }
   },
   methods: {
@@ -53,7 +71,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* Optionally add styles for the stepper */
-</style>

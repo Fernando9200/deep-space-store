@@ -7,7 +7,8 @@ export default createStore({
     offer: {},
     order: {},
     steps: ['Personal Details', 'Delivery Details', 'Payment Details', 'Confirmation'],
-    currentStep: 0 // Ensure currentStep is accurately updated
+    currentStep: 0,
+    checkoutItem: null // New state for individual item checkout
   },
   mutations: {
     setOffer(state, offer) {
@@ -45,6 +46,9 @@ export default createStore({
     },
     resetSteps(state) {
       state.currentStep = 0;
+    },
+    setCheckoutItem(state, item) {
+      state.checkoutItem = item; // Sets the item for direct checkout
     }
   },
   actions: {
@@ -61,6 +65,7 @@ export default createStore({
     cart: state => state.cart,
     offer: state => state.offer,
     order: state => state.order,
-    stepIndex: state => state.currentStep // Ensure this is correct
+    stepIndex: state => state.currentStep,
+    checkoutItem: state => state.checkoutItem // Get the checkout item for direct purchase
   }
 });

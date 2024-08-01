@@ -73,15 +73,10 @@
         this.removeCartItem(id);
       },
       proceedToCheckout() {
-        this.$router.push({ name: 'checkout', params: { step: 'personal' } });
+        // Ensure offerCode is passed correctly
+        this.$router.push({ name: 'checkout', params: { offerCode: 'default-offer-code' } });
       }
     }
   };
   </script>
-  
-  <style scoped>
-  .text-right {
-    text-align: right;
-  }
-  </style>
   
