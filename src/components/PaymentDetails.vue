@@ -34,12 +34,11 @@
     name: 'PaymentDetails',
     data() {
       return {
-        cardNumber: '',
-        paymentMethods: ['Boleto', 'Credit Card', 'Credit', 'Pix']
+        cardNumber: ''
       };
     },
     computed: {
-      ...mapState(['userData'])
+      ...mapState(['userData', 'paymentMethods'])
     },
     methods: {
       ...mapMutations(['nextStep', 'prevStep', 'setUserData']),

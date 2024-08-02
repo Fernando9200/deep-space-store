@@ -7,6 +7,7 @@ export default createStore({
     items: [],
     item: {},
     order: {},
+    paymentMethods: [],
     steps: ['Personal Details', 'Delivery Details', 'Payment Details', 'Confirmation'],
     currentStep: 0,
     checkoutItem: null,
@@ -47,6 +48,9 @@ export default createStore({
     setOrder(state, order) {
       state.order = order;
     },
+    setPaymentMethods(state, paymentMethods) {
+      state.paymentMethods = paymentMethods;
+    },
     setUserData(state, userData) {
       state.userData = { ...state.userData, ...userData };
     },
@@ -85,6 +89,14 @@ export default createStore({
         commit('setItem', {});
       }
     },
+    async fetchPaymentMethods({ commit }) {
+      try {
+        const response = await axios.get('http://localhost:3001/paymentMethods');
+        commit('setPaymentMethods', response.data);
+      } catch (error) {
+        console.error('Error fetching payment methods:', error);
+      }
+    },
     async createOrder({ commit, state }, { itemId, orderData }) {
       try {
         const completeOrderData = {
@@ -106,6 +118,7 @@ export default createStore({
     item: state => state.item,
     order: state => state.order,
     stepIndex: state => state.currentStep,
-    checkoutItem: state => state.checkoutItem
+    checkoutItem: state => state.checkoutItem,
+    paymentMethods: state => state.paymentMethods
   }
 });

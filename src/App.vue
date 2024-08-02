@@ -14,7 +14,11 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    // Fetch payment methods when the app is mounted
+    this.$store.dispatch('fetchPaymentMethods');
+  }
 };
 </script>
 
