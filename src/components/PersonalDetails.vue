@@ -5,18 +5,18 @@
         <v-form ref="personalForm" @submit.prevent="validateForm">
           <v-text-field
             label="Full Name"
-            v-model="fullName"
+            v-model="userData.fullName"
             required
           ></v-text-field>
           <v-text-field
             label="Email"
-            v-model="email"
+            v-model="userData.email"
             type="email"
             required
           ></v-text-field>
           <v-text-field
             label="Phone Number"
-            v-model="phoneNumber"
+            v-model="userData.phoneNumber"
             type="tel"
             required
           ></v-text-field>
@@ -28,24 +28,19 @@
   </template>
   
   <script>
-  import { mapMutations, mapGetters } from 'vuex';
+  import { mapMutations, mapGetters, mapState } from 'vuex';
   
   export default {
     name: 'PersonalDetails',
-    data() {
-      return {
-        fullName: '',
-        email: '',
-        phoneNumber: ''
-      };
-    },
     computed: {
+      ...mapState(['userData']),
       ...mapGetters(['stepIndex'])
     },
     methods: {
-      ...mapMutations(['nextStep', 'prevStep']),
+      ...mapMutations(['nextStep', 'prevStep', 'setUserData']),
       validateForm() {
         if (this.$refs.personalForm.validate()) {
+          this.setUserData(this.userData); // Store the user data in Vuex
           this.nextStep();
         }
       },

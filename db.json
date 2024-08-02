@@ -43,33 +43,5 @@
       ]
     }
   ],
-  "orders": [
-    {
-      "orderId": "ORDER772709",
-      "userInfo": {
-        "cpf": "123.456.789-00"
-      },
-      "paymentMethod": "Credit Card",
-      "items": [
-        {
-          "id": "SPC456",
-          "name": "Spaceship Model",
-          "price": 250,
-          "paymentMethods": [
-            "Boleto",
-            "Credit Card",
-            "Credit",
-            "Pix"
-          ],
-          "images": [
-            "image_url_2"
-          ]
-        }
-      ],
-      "status": "success",
-      "paymentDetails": {
-        "status": "Payment successful"
-      }
-    }
-  ]
+  "orders": []
 }

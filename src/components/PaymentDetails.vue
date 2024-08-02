@@ -6,18 +6,18 @@
           <v-select
             :items="paymentMethods"
             label="Payment Method"
-            v-model="paymentMethod"
+            v-model="userData.paymentMethod"
             required
           ></v-select>
           <v-text-field
-            v-if="paymentMethod === 'Credit Card'"
+            v-if="userData.paymentMethod === 'Credit Card'"
             label="Credit Card Number"
             v-model="cardNumber"
             required
           ></v-text-field>
           <v-text-field
             label="CPF"
-            v-model="cpf"
+            v-model="userData.cpf"
             required
           ></v-text-field>
           <v-btn @click="prev">Back</v-btn>
@@ -28,22 +28,24 @@
   </template>
   
   <script>
-  import { mapMutations } from 'vuex';
+  import { mapMutations, mapState } from 'vuex';
   
   export default {
     name: 'PaymentDetails',
     data() {
       return {
-        paymentMethod: '',
         cardNumber: '',
-        cpf: '',
         paymentMethods: ['Boleto', 'Credit Card', 'Credit', 'Pix']
       };
     },
+    computed: {
+      ...mapState(['userData'])
+    },
     methods: {
-      ...mapMutations(['nextStep', 'prevStep']),
+      ...mapMutations(['nextStep', 'prevStep', 'setUserData']),
       validateForm() {
         if (this.$refs.paymentForm.validate()) {
+          this.setUserData({ ...this.userData, cardNumber: this.cardNumber }); // Store the user data in Vuex
           this.nextStep();
         }
       },

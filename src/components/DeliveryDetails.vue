@@ -5,13 +5,13 @@
         <v-form ref="deliveryForm" @submit.prevent="validateForm">
           <v-text-field
             label="CEP"
-            v-model="cep"
+            v-model="userData.cep"
             @blur="fetchAddress"
             required
           ></v-text-field>
           <v-text-field
             label="Address"
-            v-model="address"
+            v-model="userData.address"
             required
           ></v-text-field>
           <v-btn @click="prev">Back</v-btn>
@@ -23,26 +23,33 @@
   
   <script>
   import axios from 'axios';
-  import { mapMutations } from 'vuex';
+  import { mapMutations, mapState } from 'vuex';
   
   export default {
     name: 'DeliveryDetails',
-    data() {
-      return {
-        cep: '',
-        address: ''
-      };
+    computed: {
+      ...mapState(['userData'])
     },
     methods: {
-      ...mapMutations(['nextStep', 'prevStep']),
+      ...mapMutations(['nextStep', 'prevStep', 'setUserData']),
       async fetchAddress() {
-        if (this.cep) {
-          const response = await axios.get(`https://viacep.com.br/ws/${this.cep}/json/`);
-          this.address = response.data.logradouro || 'Address not found';
+        if (this.userData.cep) {
+          try {
+            const response = await axios.get(`https://viacep.com.br/ws/${this.userData.cep}/json/`);
+            if (response.data && !response.data.erro) {
+              this.userData.address = response.data.logradouro || 'Address not found';
+            } else {
+              this.userData.address = 'Address not found';
+            }
+          } catch (error) {
+            console.error('Error fetching address:', error);
+            this.userData.address = 'Address not found';
+          }
         }
       },
       validateForm() {
         if (this.$refs.deliveryForm.validate()) {
+          this.setUserData(this.userData); // Store the user data in Vuex
           this.nextStep();
         }
       },

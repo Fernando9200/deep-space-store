@@ -42,7 +42,7 @@
   export default {
     name: 'ConfirmationPage',
     computed: {
-      ...mapState(['cart', 'item']),
+      ...mapState(['cart', 'item', 'userData']),
       ...mapGetters(['checkoutItem']),
       cartItems() {
         return this.cart.length ? this.cart : []; // Ensure we have a fallback to an empty array
@@ -60,9 +60,8 @@
       async confirmOrder() {
         if (this.orderItem || this.cartItems.length) {
           const orderData = {
-            cpf: '123.456.789-00', // Example CPF
-            paymentMethod: 'Credit Card', // Example payment method
-            items: this.cartItems.length ? this.cartItems : [this.orderItem] // Use the cart items if they exist, otherwise the single item
+            items: this.cartItems.length ? this.cartItems : [this.orderItem], // Use the cart items if they exist, otherwise the single item
+            paymentMethod: this.userData.paymentMethod
           };
   
           const itemId = this.orderItem ? this.orderItem.id : this.cartItems[0]?.id; // Determine the item ID for the order

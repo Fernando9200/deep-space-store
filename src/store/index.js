@@ -9,7 +9,16 @@ export default createStore({
     order: {},
     steps: ['Personal Details', 'Delivery Details', 'Payment Details', 'Confirmation'],
     currentStep: 0,
-    checkoutItem: null
+    checkoutItem: null,
+    userData: {
+      fullName: '',
+      email: '',
+      phoneNumber: '',
+      cep: '',
+      address: '',
+      paymentMethod: '',
+      cpf: ''
+    }
   },
   mutations: {
     setItems(state, items) {
@@ -37,6 +46,9 @@ export default createStore({
     },
     setOrder(state, order) {
       state.order = order;
+    },
+    setUserData(state, userData) {
+      state.userData = { ...state.userData, ...userData };
     },
     nextStep(state) {
       if (state.currentStep < state.steps.length - 1) {
@@ -73,14 +85,18 @@ export default createStore({
         commit('setItem', {});
       }
     },
-    async createOrder({ commit }, { itemId, orderData }) {
+    async createOrder({ commit, state }, { itemId, orderData }) {
       try {
-        const response = await axios.post(`http://localhost:3001/items/${itemId}/create_order`, orderData);
+        const completeOrderData = {
+          ...state.userData,
+          ...orderData
+        };
+        const response = await axios.post(`http://localhost:3001/items/${itemId}/create_order`, completeOrderData);
         commit('setOrder', response.data);
         return response.data;
       } catch (error) {
         console.error('Error creating order:', error);
-        throw error; // Re-throw the error to be caught by the component
+        throw error;
       }
     }
   },
