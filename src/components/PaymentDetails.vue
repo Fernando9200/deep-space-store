@@ -15,11 +15,7 @@
             v-model="cardNumber"
             required
           ></v-text-field>
-          <v-text-field
-            label="CPF"
-            v-model="userData.cpf"
-            required
-          ></v-text-field>
+          <v-text-field label="CPF" v-model="userData.cpf" required></v-text-field>
           <v-btn @click="prev">Back</v-btn>
           <v-btn @click="next">Next</v-btn>
         </v-form>

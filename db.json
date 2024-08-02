@@ -28,34 +28,7 @@
   "paymentMethods": [
     "Boleto",
     "Credit Card",
-    "Credit",
     "Pix"
   ],
-  "orders": [
-    {
-      "orderId": "ORDER599531",
-      "userInfo": {
-        "cpf": "17825746708",
-        "email": "fernando91.sosa@hotmail.com",
-        "phoneNumber": "27997150189",
-        "cep": "29172622",
-        "address": "Rua K"
-      },
-      "paymentMethod": "Boleto",
-      "items": [
-        {
-          "id": "ENT123",
-          "name": "Miniature of the Enterprise",
-          "price": 500,
-          "images": [
-            "image_url_1"
-          ]
-        }
-      ],
-      "status": "success",
-      "paymentDetails": {
-        "code": "BARCODE123456"
-      }
-    }
-  ]
+  "orders": []
 }
