@@ -19,8 +19,9 @@ server.get('/items/:itemId', (req, res) => {
   res.status(200).json(item);
 });
 
-// Endpoint for creating orders
-server.post('/items/:itemId/create_order', (req, res) => {
+// Endpoint for creating orders and saving them to the user's account
+server.post('/users/:userId/orders', (req, res) => {
+  const userId = req.params.userId;
   const {
     cpf,
     email,
@@ -38,6 +39,12 @@ server.post('/items/:itemId/create_order', (req, res) => {
   }
 
   const db = router.db; // Lowdb instance
+  const user = db.get('users').find({ id: userId }).value();
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
   const orderId = `ORDER${Math.floor(Math.random() * 1000000)}`;
 
   // Create the order object with user information
@@ -59,12 +66,69 @@ server.post('/items/:itemId/create_order', (req, res) => {
       : { status: 'Payment successful' }
   };
 
-  // Save the order to the database
-  db.get('orders')
+  // Save the order to the user's purchase history
+  db.get('users')
+    .find({ id: userId })
+    .get('purchases')
     .push(newOrder)
     .write();
 
   res.status(200).json(newOrder);
+});
+
+// Endpoint for user registration
+server.post('/users/register', (req, res) => {
+  const { fullName, email, password } = req.body;
+  const db = router.db;
+  const existingUser = db.get('users').find({ email }).value();
+
+  if (existingUser) {
+    return res.status(400).json({ message: 'User already exists' });
+  }
+
+  const newUser = {
+    id: `USER${Math.floor(Math.random() * 1000000)}`,
+    fullName,
+    email,
+    password, // In a real application, hash the password
+    purchases: [] // Initialize with an empty purchase history
+  };
+
+  db.get('users')
+    .push(newUser)
+    .write();
+
+  res.status(201).json({ message: 'User registered successfully', userId: newUser.id });
+});
+
+// Endpoint for user login
+server.post('/users/login', (req, res) => {
+  const { email, password } = req.body;
+  const db = router.db;
+  const user = db.get('users').find({ email, password }).value(); // Simple authentication
+
+  if (!user) {
+    return res.status(401).json({ message: 'Invalid email or password' });
+  }
+
+  res.status(200).json({
+    message: 'Login successful',
+    userId: user.id,
+    fullName: user.fullName
+  });
+});
+
+// Endpoint to get user details and purchases
+server.get('/users/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const db = router.db;
+  const user = db.get('users').find({ id: userId }).value();
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  res.status(200).json(user);
 });
 
 server.use(router);

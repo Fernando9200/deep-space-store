@@ -30,24 +30,40 @@
   </template>
   
   <script>
-  import { mapActions, mapState } from 'vuex';
+  import { mapActions, mapState, mapGetters, mapMutations } from 'vuex';
   
   export default {
     name: 'ProductsPage',
     computed: {
-      ...mapState(['items'])
+      ...mapState(['items']),
+      ...mapGetters(['isAuthenticated'])
     },
     created() {
+      this.resetCheckout();
       this.fetchItems();
     },
     methods: {
       ...mapActions(['fetchItems']),
+      ...mapMutations(['resetCheckoutData']),
+      resetCheckout() {
+        this.resetCheckoutData();
+      },
       addToCart(item) {
+        if (!this.isAuthenticated) {
+          this.$router.push('/login');
+          alert('Please log in or register to add items to the cart.');
+          return;
+        }
         this.$store.commit('addToCart', item);
       },
       buyNow(item) {
+        if (!this.isAuthenticated) {
+          this.$router.push('/login');
+          alert('Please log in or register to buy this item.');
+          return;
+        }
         this.$store.commit('setCheckoutItem', item);
-        this.$router.push({ name: 'checkoutWithItem', params: { itemId: item.id } }); // Navigate with item ID
+        this.$router.push({ name: 'checkoutWithItem', params: { itemId: item.id } });
       }
     }
   };

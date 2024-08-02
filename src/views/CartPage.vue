@@ -56,7 +56,7 @@
   export default {
     name: 'CartPage',
     computed: {
-      ...mapGetters(['cart']),
+      ...mapGetters(['cart', 'isAuthenticated']),
       cartItems() {
         return this.cart;
       },
@@ -73,7 +73,12 @@
         this.removeCartItem(id);
       },
       proceedToCheckout() {
-        this.$router.push({ name: 'checkout' }); // Navigate without item ID
+        if (!this.isAuthenticated) {
+          this.$router.push('/login');
+          alert('Please log in or register to proceed to checkout.');
+          return;
+        }
+        this.$router.push({ name: 'checkout' });
       }
     }
   };

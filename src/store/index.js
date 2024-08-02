@@ -19,7 +19,9 @@ export default createStore({
       address: '',
       paymentMethod: '',
       cpf: ''
-    }
+    },
+    currentUser: null, // Track the current logged-in user
+    isAuthenticated: false // Track authentication state
   },
   mutations: {
     setItems(state, items) {
@@ -69,6 +71,30 @@ export default createStore({
     },
     setCheckoutItem(state, item) {
       state.checkoutItem = item;
+    },
+    setCurrentUser(state, user) {
+      state.currentUser = user;
+      state.isAuthenticated = true; // Set authenticated state
+    },
+    logoutUser(state) {
+      state.currentUser = null;
+      state.isAuthenticated = false; // Reset authentication state
+    },
+    // Add this mutation to reset checkout-related data
+    resetCheckoutData(state) {
+      state.cart = [];
+      state.order = {};
+      state.currentStep = 0;
+      state.checkoutItem = null;
+      state.userData = {
+        fullName: '',
+        email: '',
+        phoneNumber: '',
+        cep: '',
+        address: '',
+        paymentMethod: '',
+        cpf: ''
+      };
     }
   },
   actions: {
@@ -97,19 +123,47 @@ export default createStore({
         console.error('Error fetching payment methods:', error);
       }
     },
-    async createOrder({ commit, state }, { itemId, orderData }) {
+    async createOrder({ commit, state }, orderData) {
+      if (!state.isAuthenticated) {
+        throw new Error('User must be logged in to make a purchase.');
+      }
+
+      const userId = state.currentUser.id;
+
       try {
-        const completeOrderData = {
+        const response = await axios.post(`http://localhost:3001/users/${userId}/orders`, {
           ...state.userData,
           ...orderData
-        };
-        const response = await axios.post(`http://localhost:3001/items/${itemId}/create_order`, completeOrderData);
+        });
         commit('setOrder', response.data);
         return response.data;
       } catch (error) {
         console.error('Error creating order:', error);
         throw error;
       }
+    },
+    async loginUser({ commit }, userData) {
+      try {
+        const response = await axios.post('http://localhost:3001/users/login', userData);
+        commit('setCurrentUser', { id: response.data.userId, fullName: response.data.fullName });
+        return response.data;
+      } catch (error) {
+        console.error('Error logging in:', error);
+        throw error;
+      }
+    },
+    async registerUser({ commit }, userData) {
+      try {
+        const response = await axios.post('http://localhost:3001/users/register', userData);
+        commit('setCurrentUser', { id: response.data.userId, fullName: userData.fullName });
+        return response.data;
+      } catch (error) {
+        console.error('Error registering user:', error);
+        throw error;
+      }
+    },
+    logoutUser({ commit }) {
+      commit('logoutUser'); // Action to handle logout
     }
   },
   getters: {
@@ -119,6 +173,8 @@ export default createStore({
     order: state => state.order,
     stepIndex: state => state.currentStep,
     checkoutItem: state => state.checkoutItem,
-    paymentMethods: state => state.paymentMethods
+    paymentMethods: state => state.paymentMethods,
+    currentUser: state => state.currentUser,
+    isAuthenticated: state => state.isAuthenticated // Getter for authentication state
   }
 });
