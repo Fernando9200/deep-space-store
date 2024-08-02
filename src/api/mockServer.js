@@ -19,7 +19,7 @@ server.get('/items/:itemId', (req, res) => {
   res.status(200).json(item);
 });
 
-// Endpoint for creating orders and saving them to the user's account
+// Endpoint for creating orders and saving them to both the user's account and global orders list
 server.post('/users/:userId/orders', (req, res) => {
   const userId = req.params.userId;
   const {
@@ -51,6 +51,7 @@ server.post('/users/:userId/orders', (req, res) => {
   const newOrder = {
     orderId: orderId,
     userInfo: {
+      userId: userId,
       cpf: cpf,
       email: email,
       name: name,
@@ -70,6 +71,11 @@ server.post('/users/:userId/orders', (req, res) => {
   db.get('users')
     .find({ id: userId })
     .get('purchases')
+    .push(newOrder)
+    .write();
+
+  // Also save the order to the global orders list
+  db.get('orders')
     .push(newOrder)
     .write();
 

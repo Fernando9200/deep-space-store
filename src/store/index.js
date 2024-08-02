@@ -21,7 +21,8 @@ export default createStore({
       cpf: ''
     },
     currentUser: null, // Track the current logged-in user
-    isAuthenticated: false // Track authentication state
+    isAuthenticated: false, // Track authentication state
+    globalOrders: [] // Store global orders
   },
   mutations: {
     setItems(state, items) {
@@ -80,7 +81,6 @@ export default createStore({
       state.currentUser = null;
       state.isAuthenticated = false; // Reset authentication state
     },
-    // Add this mutation to reset checkout-related data
     resetCheckoutData(state) {
       state.cart = [];
       state.order = {};
@@ -95,6 +95,9 @@ export default createStore({
         paymentMethod: '',
         cpf: ''
       };
+    },
+    setGlobalOrders(state, orders) {
+      state.globalOrders = orders;
     }
   },
   actions: {
@@ -164,6 +167,14 @@ export default createStore({
     },
     logoutUser({ commit }) {
       commit('logoutUser'); // Action to handle logout
+    },
+    async fetchGlobalOrders({ commit }) {
+      try {
+        const response = await axios.get('http://localhost:3001/orders');
+        commit('setGlobalOrders', response.data);
+      } catch (error) {
+        console.error('Error fetching global orders:', error);
+      }
     }
   },
   getters: {
@@ -175,6 +186,7 @@ export default createStore({
     checkoutItem: state => state.checkoutItem,
     paymentMethods: state => state.paymentMethods,
     currentUser: state => state.currentUser,
-    isAuthenticated: state => state.isAuthenticated // Getter for authentication state
+    isAuthenticated: state => state.isAuthenticated, // Getter for authentication state
+    globalOrders: state => state.globalOrders // Getter for global orders
   }
 });
