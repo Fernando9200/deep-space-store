@@ -73,8 +73,7 @@
         this.removeCartItem(id);
       },
       proceedToCheckout() {
-        // Ensure offerCode is passed correctly
-        this.$router.push({ name: 'checkout', params: { offerCode: 'default-offer-code' } });
+        this.$router.push({ name: 'checkout' }); // Navigate without item ID
       }
     }
   };

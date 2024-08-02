@@ -7,8 +7,8 @@
             <v-card-text>
               <v-row>
                 <v-col
-                  v-for="(item, index) in offerItems"
-                  :key="index"
+                  v-for="item in items"
+                  :key="item.id"
                   cols="12"
                   md="4"
                 >
@@ -30,28 +30,24 @@
   </template>
   
   <script>
-  import { mapActions } from 'vuex';
+  import { mapActions, mapState } from 'vuex';
   
   export default {
     name: 'ProductsPage',
     computed: {
-      offerItems() {
-        return this.$store.getters.offer.items || [];
-      }
+      ...mapState(['items'])
     },
     created() {
-      this.$store.dispatch('fetchOffer', 'default-offer-code');
+      this.fetchItems();
     },
     methods: {
-      ...mapActions(['fetchOffer']),
+      ...mapActions(['fetchItems']),
       addToCart(item) {
         this.$store.commit('addToCart', item);
       },
       buyNow(item) {
-        // Set only the selected item for checkout
         this.$store.commit('setCheckoutItem', item);
-        // Ensure offerCode is passed correctly
-        this.$router.push({ name: 'checkout', params: { offerCode: 'default-offer-code' } });
+        this.$router.push({ name: 'checkoutWithItem', params: { itemId: item.id } }); // Navigate with item ID
       }
     }
   };

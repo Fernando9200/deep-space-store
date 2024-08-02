@@ -4,15 +4,19 @@ import axios from 'axios';
 export default createStore({
   state: {
     cart: [],
-    offer: {},
+    items: [],
+    item: {},
     order: {},
     steps: ['Personal Details', 'Delivery Details', 'Payment Details', 'Confirmation'],
     currentStep: 0,
-    checkoutItem: null // New state for individual item checkout
+    checkoutItem: null
   },
   mutations: {
-    setOffer(state, offer) {
-      state.offer = offer;
+    setItems(state, items) {
+      state.items = items;
+    },
+    setItem(state, item) {
+      state.item = item || {};
     },
     addToCart(state, item) {
       const existingItem = state.cart.find(cartItem => cartItem.id === item.id);
@@ -48,24 +52,44 @@ export default createStore({
       state.currentStep = 0;
     },
     setCheckoutItem(state, item) {
-      state.checkoutItem = item; // Sets the item for direct checkout
+      state.checkoutItem = item;
     }
   },
   actions: {
-    async fetchOffer({ commit }, offerCode) {
-      const response = await axios.get(`http://localhost:3001/offers/${offerCode}`);
-      commit('setOffer', response.data);
+    async fetchItems({ commit }) {
+      try {
+        const response = await axios.get('http://localhost:3001/items');
+        commit('setItems', response.data);
+      } catch (error) {
+        console.error('Error fetching items:', error);
+      }
     },
-    async createOrder({ commit }, { offerCode, orderData }) {
-      const response = await axios.post(`http://localhost:3001/offers/${offerCode}/create_order`, orderData);
-      commit('setOrder', response.data);
+    async fetchItem({ commit }, itemId) {
+      try {
+        const response = await axios.get(`http://localhost:3001/items/${itemId}`);
+        commit('setItem', response.data);
+      } catch (error) {
+        console.error('Error fetching item:', error);
+        commit('setItem', {});
+      }
+    },
+    async createOrder({ commit }, { itemId, orderData }) {
+      try {
+        const response = await axios.post(`http://localhost:3001/items/${itemId}/create_order`, orderData);
+        commit('setOrder', response.data);
+        return response.data;
+      } catch (error) {
+        console.error('Error creating order:', error);
+        throw error; // Re-throw the error to be caught by the component
+      }
     }
   },
   getters: {
     cart: state => state.cart,
-    offer: state => state.offer,
+    items: state => state.items,
+    item: state => state.item,
     order: state => state.order,
     stepIndex: state => state.currentStep,
-    checkoutItem: state => state.checkoutItem // Get the checkout item for direct purchase
+    checkoutItem: state => state.checkoutItem
   }
 });

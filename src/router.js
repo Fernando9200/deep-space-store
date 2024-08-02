@@ -16,10 +16,15 @@ const routes = [
     component: CartPage
   },
   {
-    path: '/checkout/:offerCode', // Ensure this expects :offerCode
-    name: 'checkout',
+    path: '/checkout/:itemId', // For "Buy Now" with specific item
+    name: 'checkoutWithItem',
     component: CheckoutPage,
-    props: true // Pass route params as props
+    props: true
+  },
+  {
+    path: '/checkout', // For generic checkout from cart
+    name: 'checkout',
+    component: CheckoutPage
   },
   {
     path: '/thank-you',

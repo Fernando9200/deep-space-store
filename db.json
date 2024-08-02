@@ -1,29 +1,75 @@
 {
-    "offers": [
-      {
-        "id": "default-offer-code",
-        "name": "Miniature of the Enterprise",
-        "price": 500.00,
-        "items": [
-          {
-            "id": "item1",
-            "name": "Miniature",
-            "price": 500.00
-          },
-          {
-            "id": "item2",
-            "name": "Spaceship Model",
-            "price": 250.00
-          },
-          {
-            "id": "item3",
-            "name": "Alien Figurine",
-            "price": 150.00
-          }
-        ],
-        "paymentMethods": ["Boleto", "Credit Card", "Credit", "Pix"],
-        "images": ["image_url"]
+  "items": [
+    {
+      "id": "ENT123",
+      "name": "Miniature of the Enterprise",
+      "price": 500,
+      "paymentMethods": [
+        "Boleto",
+        "Credit Card",
+        "Credit",
+        "Pix"
+      ],
+      "images": [
+        "image_url_1"
+      ]
+    },
+    {
+      "id": "SPC456",
+      "name": "Spaceship Model",
+      "price": 250,
+      "paymentMethods": [
+        "Boleto",
+        "Credit Card",
+        "Credit",
+        "Pix"
+      ],
+      "images": [
+        "image_url_2"
+      ]
+    },
+    {
+      "id": "ALN789",
+      "name": "Alien Figurine",
+      "price": 150,
+      "paymentMethods": [
+        "Boleto",
+        "Credit Card",
+        "Credit",
+        "Pix"
+      ],
+      "images": [
+        "image_url_3"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "orderId": "ORDER772709",
+      "userInfo": {
+        "cpf": "123.456.789-00"
+      },
+      "paymentMethod": "Credit Card",
+      "items": [
+        {
+          "id": "SPC456",
+          "name": "Spaceship Model",
+          "price": 250,
+          "paymentMethods": [
+            "Boleto",
+            "Credit Card",
+            "Credit",
+            "Pix"
+          ],
+          "images": [
+            "image_url_2"
+          ]
+        }
+      ],
+      "status": "success",
+      "paymentDetails": {
+        "status": "Payment successful"
       }
-    ]
-  }
-  
+    }
+  ]
+}
