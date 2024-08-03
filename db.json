@@ -31,5 +31,13 @@
     "Pix"
   ],
   "orders": [],
-  "users": []
+  "users": [
+    {
+      "id": "USER755375",
+      "fullName": "Test User",
+      "email": "testaccount@hotmail.com",
+      "password": "123456",
+      "purchases": []
+    }
+  ]
 }

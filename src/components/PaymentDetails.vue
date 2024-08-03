@@ -41,6 +41,7 @@
             @input="formatCPF"
             :rules="[validateCPF]"
             required
+            data-test="CPF"
           ></v-text-field>
           <v-btn @click="prev">Back</v-btn>
           <v-btn :disabled="!isFormValid" @click="next">Next</v-btn>

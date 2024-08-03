@@ -9,11 +9,14 @@
             :rules="[validateCEP]"
             @blur="fetchAddress"
             required
+            data-test="cep-input"
           ></v-text-field>
+
           <v-text-field
             label="Address"
             v-model="userData.address"
             required
+            data-test="address-input"
           ></v-text-field>
           <v-btn @click="prev">Back</v-btn>
           <v-btn :disabled="!isFormValid" @click="next">Next</v-btn>
