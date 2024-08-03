@@ -33,11 +33,6 @@ server.post('/users/:userId/orders', (req, res) => {
     items
   } = req.body;
 
-  // Validate CPF
-  if (cpf === '000.000.000-00') {
-    return res.status(400).json({ message: 'Invalid CPF' });
-  }
-
   const db = router.db; // Lowdb instance
   const user = db.get('users').find({ id: userId }).value();
 

@@ -151,13 +151,6 @@
         }
       },
     },
-    mounted() {
-      this.$nextTick(() => {
-        if (this.isPixPayment) {
-          this.generatePixQRCode();
-        }
-      });
-    },
   };
   </script>
   

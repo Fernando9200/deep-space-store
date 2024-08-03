@@ -124,7 +124,14 @@
       },
       validateCPF(value) {
         const cpfPattern = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-        return cpfPattern.test(value) || 'Please enter a valid CPF in the format 111.222.333-12.';
+        const invalidCPF = /^(\d)\1{2}\.(\d)\2{2}\.(\d)\3{2}-(\d)\4{1}$/;
+
+        // Check if the format is correct and the CPF is not a sequence of the same digit
+        if (cpfPattern.test(value) && !invalidCPF.test(value)) {
+          return true;
+        }
+
+        return 'Please enter a valid CPF in the format 111.222.333-12.';
       },
       formatCardNumber() {
         let cleaned = this.cardNumber.replace(/\D/g, '').slice(0, 16); // Remove non-digit chars and limit to 16 digits
