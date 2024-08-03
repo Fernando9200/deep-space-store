@@ -31,13 +31,5 @@
     "Pix"
   ],
   "orders": [],
-  "users": [
-    {
-      "id": "USER711606",
-      "fullName": "Fernando Rafael Carretto Sosa",
-      "email": "fernando91.sosa@hotmail.com",
-      "password": "123456",
-      "purchases": []
-    }
-  ]
+  "users": []
 }
