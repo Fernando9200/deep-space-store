@@ -73,7 +73,6 @@
   
   <script>
   import { mapState, mapGetters } from "vuex";
-  import QRCode from "qrcode"; // Import the QRCode library
   
   export default {
     name: "ConfirmationPage",
@@ -150,23 +149,6 @@
             alert("No item to confirm.");
           }
         }
-      },
-      generatePixQRCode() {
-        const canvas = this.$refs.qrcodeCanvas;
-        if (!canvas) {
-          console.error("QR Code canvas not found");
-          return;
-        }
-  
-        const pixData = `Company: Deep Space Store\nTotal: R$ ${this.totalAmount}\nOrder ID: ${this.orderItem ? this.orderItem.id : this.cartItems[0]?.id}`;
-  
-        QRCode.toCanvas(canvas, pixData, { width: 200 }, (error) => {
-          if (error) {
-            console.error("QR Code generation failed:", error);
-          } else {
-            console.log("QR Code generated successfully");
-          }
-        });
       },
     },
     mounted() {

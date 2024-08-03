@@ -57,7 +57,7 @@
           try {
             const response = await axios.post('http://localhost:3001/users/register', this.formData);
             alert(response.data.message);
-            this.$store.commit('setCurrentUser', { id: response.data.userId, fullName: this.formData.fullName });
+            this.$store.commit('setCurrentUser', { id: response.data.userId, fullName: this.formData.fullName, email: this.formData.email });
             this.$router.push('/'); // Redirect to home page after registration
           } catch (error) {
             console.error('Registration failed:', error);
