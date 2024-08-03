@@ -67,11 +67,15 @@ server.post('/users/:userId/orders', (req, res) => {
       : { status: 'Payment successful' }
   };
 
+  const purchaseRecord = {
+    orderId: orderId,
+  };
+
   // Save the order to the user's purchase history
   db.get('users')
     .find({ id: userId })
     .get('purchases')
-    .push(newOrder)
+    .push(purchaseRecord)
     .write();
 
   // Also save the order to the global orders list
