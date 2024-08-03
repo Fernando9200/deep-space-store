@@ -38,42 +38,49 @@
     name: 'PersonalDetails',
     data() {
       return {
-        isFormValid: false, // To track form validity
+        isFormValid: false, // Para rastrear a validade do formulário
       };
     },
     computed: {
-      ...mapState(['userData']),
+      ...mapState(['userData', 'currentUser']),
       ...mapGetters(['stepIndex']),
+    },
+    mounted() {
+      // Preencher automaticamente os campos com os dados do usuário logado
+      if (this.currentUser) {
+        this.userData.fullName = this.currentUser.fullName;
+        this.userData.email = this.currentUser.email;
+      }
     },
     methods: {
       ...mapMutations(['nextStep', 'prevStep', 'setUserData']),
       validateFullName(value) {
-        // Validate that the full name contains at least two words
+        // Validar se o nome completo contém pelo menos duas palavras
         const nameParts = value.trim().split(' ');
         return nameParts.length > 1 || 'Please enter your full name.';
       },
       validateEmail(value) {
-        // Simple email regex pattern
+        // Padrão simples de regex para email
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailPattern.test(value) || 'Please enter a valid email address.';
       },
       validatePhoneNumber(value) {
-        // Regex for Brazilian phone number (11 digits)
+        // Regex para número de telefone brasileiro (11 dígitos)
         const phonePattern = /^\(\d{2}\) \d{5}-\d{4}$/;
         return phonePattern.test(value) || 'Please enter a valid Brazilian phone number.';
       },
       formatPhoneNumber() {
-        // Automatically format the phone number
-        let cleaned = this.userData.phoneNumber.replace(/\D/g, ''); // Remove all non-digit characters
+        // Formatar automaticamente o número de telefone
+        let cleaned = this.userData.phoneNumber.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
         if (cleaned.length > 2) {
-          // Format as (XX) XXXXX-XXXX
+          // Formatar como (XX) XXXXX-XXXX
           cleaned = cleaned.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
         }
         this.userData.phoneNumber = cleaned;
       },
       validateForm() {
         if (this.$refs.personalForm.validate()) {
-          this.setUserData(this.userData); // Store the user data in Vuex
+          this.setUserData(this.userData); // Armazenar os dados do usuário no Vuex
           this.nextStep();
         }
       },

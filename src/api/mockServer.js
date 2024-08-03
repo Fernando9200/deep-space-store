@@ -120,7 +120,8 @@ server.post('/users/login', (req, res) => {
   res.status(200).json({
     message: 'Login successful',
     userId: user.id,
-    fullName: user.fullName
+    fullName: user.fullName,
+    email: user.email
   });
 });
 

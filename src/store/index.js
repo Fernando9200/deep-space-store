@@ -148,7 +148,7 @@ export default createStore({
     async loginUser({ commit }, userData) {
       try {
         const response = await axios.post('http://localhost:3001/users/login', userData);
-        commit('setCurrentUser', { id: response.data.userId, fullName: response.data.fullName });
+        commit('setCurrentUser', { id: response.data.userId, fullName: response.data.fullName, email: response.data.email });
         return response.data;
       } catch (error) {
         console.error('Error logging in:', error);
@@ -158,7 +158,7 @@ export default createStore({
     async registerUser({ commit }, userData) {
       try {
         const response = await axios.post('http://localhost:3001/users/register', userData);
-        commit('setCurrentUser', { id: response.data.userId, fullName: userData.fullName });
+        commit('setCurrentUser', { id: response.data.userId, fullName: userData.fullName, email: response.data.email });
         return response.data;
       } catch (error) {
         console.error('Error registering user:', error);

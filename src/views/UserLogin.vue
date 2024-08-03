@@ -50,7 +50,8 @@
             // Save the logged-in user in the store
             this.$store.commit('setCurrentUser', {
               id: response.data.userId,
-              fullName: response.data.fullName
+              fullName: response.data.fullName,
+              email: response.data.email
             });
             this.$router.push('/'); // Redirect to home page or user dashboard
           } catch (error) {
