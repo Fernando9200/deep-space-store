@@ -70,8 +70,8 @@ describe('Purchase Flow', () => {
     cy.get('[data-test="CPF"] input') // Target the input within the cep-input data attribute
       .should('have.length', 1) // Ensure only one element is selected
       .click() // Click into the field to focus it
-      .type('11111111111') // Type the CEP
-      .should('have.value', '111.111.111-11');
+      .type('12152722989') // Type the CEP
+      .should('have.value', '121.527.229-89');
 
     // Confirm the order
     cy.get('button').contains('Confirm Order').click({ force: true });
