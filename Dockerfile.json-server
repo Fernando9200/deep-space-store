@@ -1,0 +1,19 @@
+FROM node:18
+
+# Set the working directory.
+WORKDIR /app
+
+# Copy package.json and package-lock.json.
+COPY package*.json ./
+
+# Install dependencies.
+RUN npm install
+
+# Copy only necessary files.
+COPY db.json src/api/mockServer.js ./
+
+# Expose port 3001.
+EXPOSE 3001
+
+# Command to run the server.
+CMD ["node", "mockServer.js"]

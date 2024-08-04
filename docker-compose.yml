@@ -1,0 +1,65 @@
+version: "3.8"
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: serve
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+    volumes:
+      - ./db.json:/app/db.json
+      - ./src:/app/src
+
+  json-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.json-server
+    ports:
+      - "3001:3001"
+    networks:
+      - app-network
+    volumes:
+      - ./db.json:/app/db.json
+
+  cypress:
+    image: cypress/included:13.13.2
+    working_dir: /e2e
+    entrypoint:
+      [
+        "sh",
+        "-c",
+        "./wait-for-it.sh frontend 80 --timeout=60 && npx cypress run",
+      ]
+    networks:
+      - app-network
+    volumes:
+      - ./cypress:/e2e/cypress
+      - ./cypress.config.js:/e2e/cypress.config.js
+      - ./package.json:/e2e/package.json
+      - ./package-lock.json:/e2e/package-lock.json
+      - ./wait-for-it.sh:/e2e/wait-for-it.sh
+    depends_on:
+      - frontend
+      - json-server
+
+  mocha:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+    working_dir: /app
+    entrypoint: ["npm", "test"]
+    networks:
+      - app-network
+    volumes:
+      - ./:/app
+    depends_on:
+      - json-server
