@@ -56,7 +56,6 @@ services:
       dockerfile: Dockerfile
       target: test
     working_dir: /app
-    entrypoint: ["npm", "test"]
     networks:
       - app-network
     volumes:
