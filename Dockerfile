@@ -37,11 +37,14 @@ FROM node:18 as test
 # Set the working directory
 WORKDIR /app
 
-# Copy the whole project for testing
-COPY . .
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-# Install dependencies (test environment)
-RUN npm install
+# Install only the dev dependencies needed for testing
+RUN npm install --only=dev
+
+# Copy the entire project for testing
+COPY . .
 
 # Run Mocha tests
 CMD ["npm", "test"]
