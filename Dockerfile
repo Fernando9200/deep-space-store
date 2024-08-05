@@ -45,6 +45,3 @@ RUN npm install --only=dev
 
 # Copy the entire project for testing
 COPY . .
-
-# Run Mocha tests
-CMD ["npm", "test"]
