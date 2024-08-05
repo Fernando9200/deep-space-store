@@ -45,3 +45,5 @@ RUN npm install --only=dev
 
 # Copy the entire project for testing
 COPY . .
+
+RUN npm test
