@@ -38,7 +38,7 @@ Deep Space Store é uma aplicação que emula um e-coomerce. Este projeto foi de
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/Fernando92/deep-space-store.git
+   git clone https://github.com/Fernando9200/deep-space-store.git
    cd deep-space-store
 
 2. **Instale as dependências**
