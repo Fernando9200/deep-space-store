@@ -30,54 +30,14 @@
     "Credit Card",
     "Pix"
   ],
-  "orders": [
-    {
-      "orderId": "ORDER30771",
-      "userInfo": {
-        "userId": "USER755375",
-        "cpf": "213.213.132-12",
-        "email": "testaccount@hotmail.com",
-        "phoneNumber": "(13) 12312-2112",
-        "cep": "29172625",
-        "address": "Rua Natalino Ribeiro"
-      },
-      "paymentMethod": "Boleto",
-      "status": "success",
-      "paymentDetails": {
-        "status": "Waiting for payment to be confirmed"
-      }
-    },
-    {
-      "orderId": "ORDER576551",
-      "userInfo": {
-        "userId": "USER755375",
-        "cpf": "121.527.229-89",
-        "email": "testaccount@hotmail.com",
-        "phoneNumber": "(27) 99778-6891",
-        "cep": "29172625",
-        "address": "Rua Natalino Ribeiro"
-      },
-      "paymentMethod": "Pix",
-      "status": "success",
-      "paymentDetails": {
-        "status": "Payment successful"
-      }
-    }
-  ],
+  "orders": [],
   "users": [
     {
       "id": "USER755375",
       "fullName": "Test User",
       "email": "testaccount@hotmail.com",
       "password": "123456",
-      "purchases": [
-        {
-          "orderId": "ORDER30771"
-        },
-        {
-          "orderId": "ORDER576551"
-        }
-      ]
+      "purchases": []
     }
   ]
 }
