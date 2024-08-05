@@ -179,6 +179,7 @@ export default createStore({
   },
   getters: {
     cart: state => state.cart,
+    cartCount: state => state.cart.reduce((total, item) => total + item.quantity, 0), // Returns the total quantity of items in the cart
     items: state => state.items,
     item: state => state.item,
     order: state => state.order,

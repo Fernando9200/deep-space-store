@@ -64,3 +64,80 @@
   };
   </script>
   
+<style scoped>
+/* Container */
+.v-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  padding: 0 16px; /* Padding for responsiveness on small screens */
+}
+
+/* Form */
+.v-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Text Fields */
+.v-text-field {
+  margin-bottom: 16px;
+}
+
+.v-text-field input {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus State for Inputs */
+.v-text-field input:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 5px rgba(66, 165, 245, 0.5);
+}
+
+/* Labels */
+.v-text-field label {
+  color: #333333;
+  font-weight: bold;
+}
+
+/* Button */
+.v-btn {
+  background-color: #42a5f5;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.v-btn:hover {
+  background-color: #1e88e5;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.v-btn:disabled {
+  background-color: #b0bec5;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .v-form {
+    padding: 16px;
+  }
+}
+</style>

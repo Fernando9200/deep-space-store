@@ -33,7 +33,7 @@ server.post('/users/:userId/orders', (req, res) => {
     items
   } = req.body;
 
-  const db = router.db; // Lowdb instance
+  const db = router.db;
   const user = db.get('users').find({ id: userId }).value();
 
   if (!user) {
@@ -57,8 +57,8 @@ server.post('/users/:userId/orders', (req, res) => {
     paymentMethod: paymentMethod,
     items: items,
     status: 'success',
-    paymentDetails: paymentMethod === 'Boleto' || paymentMethod === 'Pix'
-      ? { code: 'BARCODE123456' }
+    paymentDetails: paymentMethod === 'Boleto'
+      ? { status: 'Waiting for payment to be confirmed' }
       : { status: 'Payment successful' }
   };
 
@@ -95,8 +95,8 @@ server.post('/users/register', (req, res) => {
     id: `USER${Math.floor(Math.random() * 1000000)}`,
     fullName,
     email,
-    password, // In a real application, hash the password
-    purchases: [] // Initialize with an empty purchase history
+    password,
+    purchases: []
   };
 
   db.get('users')

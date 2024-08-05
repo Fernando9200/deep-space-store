@@ -2,26 +2,26 @@
   "items": [
     {
       "id": "ENT123",
-      "name": "Miniature of the Enterprise",
-      "price": 500,
+      "name": "Miniatura da Enterprise",
+      "price": 150,
       "images": [
-        "image_url_1"
+        "/src/assets/Miniatura_Enterprise.png"
       ]
     },
     {
       "id": "SPC456",
-      "name": "Spaceship Model",
-      "price": 250,
+      "name": "Modelo do Ônibus Espcial",
+      "price": 200,
       "images": [
-        "image_url_2"
+        "/src/assets/Modelo_Onibus_Espacial.png"
       ]
     },
     {
       "id": "ALN789",
-      "name": "Alien Figurine",
-      "price": 150,
+      "name": "Alien Figure",
+      "price": 160,
       "images": [
-        "image_url_3"
+        "/src/assets/Alien_Figure.png"
       ]
     }
   ],

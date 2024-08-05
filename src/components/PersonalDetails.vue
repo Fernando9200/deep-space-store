@@ -1,6 +1,6 @@
 <template>
     <v-card>
-      <v-card-title>Personal Details</v-card-title>
+      <v-card-title>Dados do Comprador</v-card-title>
       <v-card-text>
         <v-form ref="personalForm" v-model="isFormValid" @submit.prevent="validateForm">
           <v-text-field
@@ -94,3 +94,80 @@
   };
   </script>
   
+ <style scoped>
+/* Base styles for v-card */
+.v-card {
+  background-color: #f8f9fa; /* Light background for a soft look */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 16px; /* Padding for breathing space */
+}
+
+/* Styling for card title */
+.v-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333; /* Dark text for contrast */
+  border-bottom: 2px solid #eee; /* Bottom border for separation */
+  padding-bottom: 8px;
+  margin-bottom: 16px; /* Margin for separation from text */
+}
+
+/* Styling for card text (form container) */
+.v-card-text {
+  padding: 16px;
+  font-family: 'Roboto', sans-serif; /* Clean, modern font */
+}
+
+/* Styles for text fields */
+.v-text-field {
+  margin-bottom: 16px; /* Space between fields */
+}
+
+/* Styling for input labels */
+.v-input__slot::before,
+.v-label {
+  color: #555 !important; /* Subtle label color */
+  font-weight: 500; /* Medium font weight for emphasis */
+}
+
+/* Styling for buttons */
+.v-btn {
+  margin-right: 8px; /* Space between buttons */
+  background-color: #007bff; /* Primary blue color */
+  color: #fff; /* White text for contrast */
+  border-radius: 4px; /* Rounded corners for a softer look */
+  font-weight: bold; /* Bold text for emphasis */
+  transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+.v-btn:disabled {
+  background-color: #aaa; /* Disabled button color */
+  color: #ddd; /* Light text for disabled state */
+}
+
+.v-btn:not(:disabled):hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .v-card {
+    padding: 12px; /* Reduced padding for smaller screens */
+  }
+  .v-card-title {
+    font-size: 1.25rem; /* Smaller font for smaller screens */
+  }
+  .v-card-text {
+    padding: 12px; /* Reduced padding for smaller screens */
+  }
+  .v-text-field {
+    margin-bottom: 12px; /* Reduced margin for smaller screens */
+  }
+  .v-btn {
+    font-size: 0.9rem; /* Smaller font size for buttons */
+  }
+}
+
+
+</style>
