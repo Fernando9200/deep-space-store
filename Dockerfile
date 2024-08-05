@@ -1,49 +1,21 @@
-# Stage 1: Build the Vue.js application
-FROM node:18 as build
+# Usar uma imagem base do Node.js
+FROM node:18
 
-# Set the working directory
+# Criar diretório de trabalho
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copiar arquivos package.json e package-lock.json
 COPY package*.json ./
 
-# Install dependencies
+# Instalar dependências
 RUN npm install
 
-# Copy the application code
+# Copiar o restante do projeto
 COPY . .
 
-# Build the application
-RUN npm run build
+# Expor portas para JSON Server e a aplicação Vue.js
+EXPOSE 8080 3001
 
-# Stage 2: Serve the app with Nginx
-FROM nginx:stable-alpine as serve
+# Script para iniciar ambos os servidores
+CMD ["sh", "-c", "npm run mock-server & npm run serve"]
 
-# Copy built files to Nginx directory
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Copy Nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Expose port 80
-EXPOSE 80
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
-
-# Stage 3: Run Mocha tests
-FROM node:18 as test
-
-# Set the working directory
-WORKDIR /app
-
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install only the dev dependencies needed for testing
-RUN npm install --only=dev
-
-# Copy the entire project for testing
-COPY . .
-
-RUN npm test
