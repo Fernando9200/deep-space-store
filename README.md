@@ -45,38 +45,23 @@ Deep Space Store é uma aplicação que emula um e-coomerce. Este projeto foi de
 
    ```bash
    npm install
-   
-3. **Instale o json-server**
 
-   ```bash
-   npm install json-server@^0.17.1
-
-4. **Instale o mocha**
-
-   ```bash
-   npm install --save-dev mocha
-
-5. **Instale o cypress**
-
-   ```bash
-   npm install cypress --save-dev
-
-6. **Inicie o servidor JSON:**
+3. **Inicie o servidor JSON:**
    
    Em uma aba do terminal, execute:
    ```bash
    npm run mock-server
 
-7. **Inicie o servidor de desenvolvimento Vue:**
+4. **Inicie o servidor de desenvolvimento Vue:**
 
    Em outra aba do terminal, execute:
    ```bash
    npm run serve
 
-8. **Acesse a aplicação:**  
+5. **Acesse a aplicação:**  
    Abra o navegador e vá para `http://localhost:8080`
 
-9. **Para facilitar o teste do aplicativo, você pode usar a conta de teste abaixo:**
+6. **Para facilitar o teste do aplicativo, você pode usar a conta de teste abaixo:**
 
 - **Email:** `testaccount@hotmail.com`
 - **Senha:** `123456`
@@ -85,12 +70,12 @@ Deep Space Store é uma aplicação que emula um e-coomerce. Este projeto foi de
 
 ## Rodando com Docker  
 
-Caso prefira, é possível rodar a aplicação utilizando Docker. Certifique-se de ter o programa instalado no seu computador.
+Caso prefira, é possível rodar a aplicação utilizando Docker.
 
 **Construir e rodar a aplicação:**
 
 ```bash
-docker-compose up --build frontend json-server
+docker-compose up --build
 ```
 
 ## Testes
@@ -108,6 +93,12 @@ O projeto utiliza Cypress para testes de ponta a ponta e Mocha para testes unit�
 
    ```bash
    npm test
+   ```
+
+4. **Para rodar os testes unitários dentro do contêiner:**
+
+   ```bash
+   docker exec -it deep-space-store npm run test
    ```
 
 ## Contato
