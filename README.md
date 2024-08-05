@@ -90,7 +90,7 @@ Caso prefira, é possível rodar a aplicação utilizando Docker. Certifique-se 
 **Construir e rodar a aplicação:**
 
 ```bash
-docker-compose up --build
+docker-compose up --build frontend json-server
 ```
 
 ## Testes
