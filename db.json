@@ -10,7 +10,7 @@
     },
     {
       "id": "SPC456",
-      "name": "Modelo do Ônibus Espcial",
+      "name": "Modelo do Ônibus Espacial",
       "price": 200,
       "images": [
         "/src/assets/Modelo_Onibus_Espacial.png"
