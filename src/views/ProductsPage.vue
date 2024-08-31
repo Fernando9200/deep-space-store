@@ -3,7 +3,7 @@
       <v-row>
         <v-col cols="12">
           <v-card>
-            <v-card-title>Produtos</v-card-title>
+            <v-card-title>Products</v-card-title>
             <v-card-text>
               <v-row>
                 <v-col
@@ -15,10 +15,10 @@
               <v-card>
                 <v-img :src="require(`@/assets/${getImageFileName(item.id)}`)" height="200px" alt="Product Image"></v-img>
                 <v-card-title>{{ item.name }}</v-card-title>
-                <v-card-subtitle>Preço: R${{ item.price }}</v-card-subtitle>
+                <v-card-subtitle>Price: ${{ item.price }}</v-card-subtitle>
                 <v-card-actions>
-                  <v-btn @click="addToCart(item)">Adicionar</v-btn>
-                  <v-btn color="primary" @click="buyNow(item)">Comprar Agora</v-btn>
+                  <v-btn @click="addToCart(item)">Add to Cart</v-btn>
+                  <v-btn color="primary" @click="buyNow(item)">Buy Now</v-btn>
                 </v-card-actions>
               </v-card>
                 </v-col>
@@ -80,14 +80,12 @@
   </script>
   
   <style scoped>
-  /* Container */
   .v-container {
     margin-top: 20px;
     padding: 16px;
     background-color: #f9f9f9;
   }
   
-  /* Main Card */
   .v-card {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
@@ -96,7 +94,6 @@
     background-color: #ffffff;
   }
   
-  /* Card Title */
   .v-card-title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -106,7 +103,6 @@
     border-bottom: 2px solid #eeeeee;
   }
   
-  /* Card Subtitle */
   .v-card-subtitle {
     font-size: 1.1rem;
     color: #666666;
@@ -115,7 +111,6 @@
     background-color: #ffffff;
   }
   
-  /* Card Actions */
   .v-card-actions {
     display: flex;
     justify-content: space-between;
@@ -126,7 +121,6 @@
     border-bottom-right-radius: 12px;
   }
   
-  /* Buttons */
   .v-btn {
     font-weight: bold;
     text-transform: uppercase;
@@ -141,7 +135,6 @@
     color: #ffffff;
   }
   
-  /* Primary Button */
   .v-btn.primary {
     background-color: #42a5f5;
     color: #ffffff;
@@ -151,7 +144,6 @@
     background-color: #1e88e5;
   }
   
-  /* Responsive Design */
   @media (max-width: 600px) {
     .v-card-title {
       font-size: 1.25rem;

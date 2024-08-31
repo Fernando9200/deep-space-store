@@ -3,7 +3,7 @@
       <v-row>
         <v-col>
           <v-card>
-            <v-card-title>Carrinho</v-card-title>
+            <v-card-title>Cart</v-card-title>
             <v-card-text>
               <v-list v-if="cartItems.length">
                 <v-list-item-group>
@@ -13,9 +13,9 @@
                   >
                     <v-list-item-content>
                       <v-list-item-title>{{ item.name }}</v-list-item-title>
-                      <v-list-item-subtitle>Preço: R${{ item.price }}</v-list-item-subtitle>
+                      <v-list-item-subtitle>Price: ${{ item.price }}</v-list-item-subtitle>
                       <v-list-item-subtitle>
-                        Quantidade:
+                        Quantity:
                         <v-text-field
                           v-model.number="item.quantity"
                           type="number"
@@ -33,7 +33,7 @@
               </v-list>
               <v-divider></v-divider>
               <v-row>
-                <v-col>Total: R${{ cartTotal }}</v-col>
+                <v-col>Total: ${{ cartTotal }}</v-col>
                 <v-col class="text-right">
                   <v-btn
                     :disabled="cartItems.length === 0"
@@ -85,14 +85,12 @@
   </script>
   
   <style scoped>
-/* Container */
 .v-container {
   margin-top: 20px;
   padding: 16px;
   background-color: #f9f9f9;
 }
 
-/* Card */
 .v-card {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
@@ -100,7 +98,6 @@
   overflow: hidden;
 }
 
-/* Card Title */
 .v-card-title {
   font-size: 1.5rem;
   font-weight: bold;
@@ -112,7 +109,6 @@
   margin-bottom: 8px;
 }
 
-/* List Items */
 .v-list-item {
   border-bottom: 1px solid #eeeeee;
   padding: 16px 0;
@@ -140,7 +136,6 @@
   align-items: center;
 }
 
-/* Remove Button */
 .v-btn.red {
   background-color: #f44336;
   color: #ffffff;
@@ -151,7 +146,6 @@
   background-color: #d32f2f;
 }
 
-/* Total and Checkout */
 .v-divider {
   margin: 16px 0;
 }
@@ -170,7 +164,6 @@
   text-align: right;
 }
 
-/* Checkout Button */
 .v-btn {
   font-weight: bold;
   text-transform: uppercase;

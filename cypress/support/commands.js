@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const COMMAND_DELAY = 1000; // Adjust this value to slow down the test
+const COMMAND_DELAY = 1500; // Adjust this value to slow down the test
 
 for (const command of ['click', 'type', 'select', 'check', 'uncheck', 'trigger', 'dblclick']) {
   Cypress.Commands.overwrite(command, (originalFn, ...args) => {

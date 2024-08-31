@@ -5,13 +5,13 @@
         <v-card class="elevation-2 pa-4">
           <v-card-title class="text-h5 mb-3">
             <v-icon class="mr-2" color="green darken-2">mdi-check-circle-outline</v-icon>
-            Muito obrigado pela sua compra!
+            Thank you for your order!
           </v-card-title>
           <v-divider></v-divider>
           <v-card-text class="mt-3">
             <v-row class="mb-2">
               <v-col cols="12" class="text-subtitle-1">
-                <strong>ID da Compra:</strong> {{ order.orderId }}
+                <strong>Order ID:</strong> {{ order.orderId }}
               </v-col>
             </v-row>
             <v-row>
@@ -46,11 +46,11 @@ export default {
 <style scoped>
 .v-card-title {
   font-weight: bold;
-  color: #4caf50; /* Green color for the title */
+  color: #4caf50;
 }
 
 .v-card {
-  background-color: #f9f9f9; /* Light background color */
+  background-color: #f9f9f9;
   border-radius: 12px;
 }
 
@@ -60,6 +60,6 @@ export default {
 
 .text-subtitle-1 {
   font-size: 16px;
-  color: #424242; /* Dark grey color for text */
+  color: #424242;
 }
 </style>

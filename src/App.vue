@@ -18,7 +18,7 @@
         title="View Products"
       >
         <v-icon left class="mr-1">mdi-store</v-icon>
-        Produtos
+        Products
       </v-btn>
       <v-btn
         text
@@ -27,7 +27,7 @@
         title="View Cart"
       >
         <v-icon left class="mr-1">mdi-cart-outline</v-icon>
-        Carrinho
+        Cart
         <v-badge
           v-if="cartCount > 0"
           :content="cartCount"
@@ -48,7 +48,7 @@
       <div v-else class="d-flex align-center">
         <v-btn text class="mr-3" @click="$router.push('/register')" title="Register">
           <v-icon left class="mr-1">mdi-account-plus</v-icon>
-          Registrar
+          Register
         </v-btn>
         <v-btn text @click="$router.push('/login')" title="Login">
           <v-icon left class="mr-1">mdi-login</v-icon>

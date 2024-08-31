@@ -98,6 +98,9 @@ export default createStore({
     },
     setGlobalOrders(state, orders) {
       state.globalOrders = orders;
+    },
+    clearCart(state) {
+      state.cart = [];
     }
   },
   actions: {

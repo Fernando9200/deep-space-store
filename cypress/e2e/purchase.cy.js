@@ -3,6 +3,7 @@ describe('Purchase Flow', () => {
   before(() => {
     // Visit the home page
     cy.visit('/');
+    cy.viewport(1280, 720);
   });
 
   it('should allow a test user to log in, add an item to the cart, and complete a purchase', () => {
@@ -23,8 +24,8 @@ describe('Purchase Flow', () => {
     cy.url().should('eq', Cypress.config().baseUrl + '/');
 
     // Add an item to the cart
-    cy.contains('Adicionar').click();
-    cy.contains('Carrinho').click();
+    cy.contains('Add to Cart').click();
+    cy.contains('Cart').click();
 
     // Make sure to assert the page change to the cart
     cy.url().should('include', '/cart');
@@ -43,12 +44,14 @@ describe('Purchase Flow', () => {
       .should('have.length', 1)
       .click()
       .type('29172625')
+      .click()
       .should('have.value', '29172625');
 
     cy.get('[data-test="address-input"] input')
       .should('have.length', 1)
       .click()
       .should('have.value', 'Rua Natalino Ribeiro');
+      cy.wait(1000);
     
     cy.get('button').contains('Next').click({ force: true });
 
@@ -71,6 +74,6 @@ describe('Purchase Flow', () => {
     // Confirm the order
     cy.get('button').contains('Confirm Order').click();
     cy.url().should('include', '/thank-you');
-    cy.contains('Muito obrigado pela sua compra!');
+    cy.contains('Thank you for your order!');
   });
 });

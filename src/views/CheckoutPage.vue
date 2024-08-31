@@ -66,14 +66,12 @@ export default {
 </script>
 
 <style scoped>
-/* Container */
 .v-container {
   margin-top: 20px;
   padding: 16px;
-  background-color: #f5f5f5; /* Softer background color */
+  background-color: #f5f5f5;
 }
 
-/* Stepper */
 .v-stepper {
   background-color: #ffffff;
   border-radius: 12px;
@@ -82,7 +80,6 @@ export default {
   padding: 20px;
 }
 
-/* Stepper Header */
 .v-stepper-header {
   display: flex;
   align-items: center;
@@ -100,20 +97,19 @@ export default {
   position: relative;
   padding: 10px 0;
   cursor: pointer;
-  border-bottom: 2px solid #e0e0e0; /* Underline for steps */
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .v-stepper-step.complete {
   color: #42a5f5;
-  border-bottom-color: #42a5f5; /* Highlight complete steps */
+  border-bottom-color: #42a5f5;
 }
 
 .v-stepper-step.active {
   color: #1e88e5;
-  border-bottom-color: #1e88e5; /* Highlight active step */
+  border-bottom-color: #1e88e5;
 }
 
-/* Arrows or connectors */
 .v-stepper-step::after {
   content: '➔';
   position: absolute;
@@ -133,7 +129,6 @@ export default {
   display: none;
 }
 
-/* Stepper Divider */
 .v-divider {
   width: 100%;
   margin: 0;
@@ -141,7 +136,6 @@ export default {
   background-color: #e0e0e0;
 }
 
-/* Stepper Content */
 .v-stepper-items {
   padding: 24px;
   border-radius: 12px;
@@ -161,7 +155,6 @@ export default {
   justify-content: space-between;
 }
 
-/* Navigation Buttons */
 .v-btn {
   font-weight: bold;
   text-transform: uppercase;
@@ -194,7 +187,6 @@ export default {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Alert */
 .v-alert {
   margin-top: 20px;
   border-radius: 8px;
@@ -204,7 +196,6 @@ export default {
   border: 1px solid #f44336;
 }
 
-/* Responsive Design */
 @media (max-width: 600px) {
   .v-stepper-header {
     flex-direction: column;
@@ -217,7 +208,7 @@ export default {
   }
 
   .v-stepper-step::after {
-    display: none; /* Hide arrows on small screens */
+    display: none;
   }
 }
 </style>

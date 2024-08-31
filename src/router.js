@@ -35,7 +35,11 @@ const routes = [
     path: '/thank-you',
     name: 'thankYou',
     component: ThankYouPage,
-    meta: { requiresAuth: true } // Require authentication
+    meta: { requiresAuth: true },
+    beforeEnter: (to, from, next) => {
+      store.commit('clearCart');
+      next();
+    }
   },
   {
     path: '/register',

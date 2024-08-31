@@ -3,7 +3,7 @@
       <v-text-field label="Full Name" v-model="formData.fullName" required></v-text-field>
       <v-text-field label="Email" v-model="formData.email" required></v-text-field>
       <v-text-field label="Phone Number" v-model="formData.phoneNumber" required></v-text-field>
-      <v-text-field label="CEP" v-model="formData.cep" @blur="fetchAddress" required></v-text-field>
+      <v-text-field label="Postal Code" v-model="formData.cep" @blur="fetchAddress" required></v-text-field>
       <v-text-field label="Address" v-model="formData.address" required></v-text-field>
       <v-select label="Payment Method" :items="paymentMethods" v-model="formData.paymentMethod" required></v-select>
       <v-text-field label="CPF" v-model="formData.cpf" required></v-text-field>

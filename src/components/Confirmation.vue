@@ -1,26 +1,26 @@
 <template>
   <v-card>
-    <v-card-title>Informações da Compra</v-card-title>
+    <v-card-title>Order Confirmation</v-card-title>
     <v-card-text>
       <!-- Display Order Summary -->
       <div v-if="orderItem">
-        <p>Muito obrigado por comprar conosco!</p>
-        <p><strong>Nome do Produto:</strong> {{ orderItem.name }}</p>
-        <p><strong>Preço:</strong> R${{ totalAmount }}</p>
+        <p>Thank you for your purchase!</p>
+        <p><strong>Product Name:</strong> {{ orderItem.name }}</p>
+        <p><strong>Price:</strong> R${{ totalAmount }}</p>
         <v-img :src="orderItem.images[0]" alt="Product Image" max-width="200"></v-img>
       </div>
       <div v-else-if="cartItems.length">
-        <p>Muito obrigado pela sua compra! Resumo do seu pedido:</p>
+        <p>Thank you for your purchase! Here's a summary of your order:</p>
         <v-list>
           <v-list-item-group>
             <v-list-item v-for="(cartItem, index) in cartItems" :key="index">
               <v-list-item-content>
                 <v-list-item-title>{{ cartItem.name }}</v-list-item-title>
                 <v-list-item-subtitle>
-                  Preço: R${{ cartItem.price }}
+                  Price: ${{ cartItem.price }}
                 </v-list-item-subtitle>
                 <v-list-item-subtitle>
-                  Quantidade: {{ cartItem.quantity }}
+                  Quantity: {{ cartItem.quantity }}
                 </v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-action>
@@ -33,23 +33,23 @@
             </v-list-item>
           </v-list-item-group>
         </v-list>
-        <p v-if="isCard"><strong>Preço Total:</strong> R${{ totalAmount }}</p>
+        <p v-if="isCard"><strong>Total Price:</strong> ${{ totalAmount }}</p>
       </div>
-      <v-alert type="error" v-else>Não há items no carrinho para confirmar a compra</v-alert>
+      <v-alert type="error" v-else>No items to confirm in the order</v-alert>
 
       <!-- Display Boleto Information if Payment Method is Boleto -->
       <div v-if="isBoletoPayment || isPixPayment">
         <div class="boleto">
-        <h3 v-if="isBoletoPayment">Boleto Bancário</h3>
-        <h3 v-if="isPixPayment">Pagamento com Pix</h3>
-          <p><strong>Beneficiário:</strong> Deep Space Store</p>
+        <h3 v-if="isBoletoPayment">Boleto</h3>
+        <h3 v-if="isPixPayment">Payment with Pix</h3>
+          <p><strong>Beneficiary:</strong> Deep Space Store</p>
           <p><strong>CNPJ:</strong> 12.345.678/0001-99</p>
-          <p><strong>Agência:</strong> 1234</p>
-          <p><strong>Conta:</strong> 56789-0</p>
-          <p><strong>Vencimento:</strong> {{ dueDate }}</p>
+          <p><strong>Agency:</strong> 1234</p>
+          <p><strong>Account:</strong> 56789-0</p>
+          <p><strong>Due Date:</strong> {{ dueDate }}</p>
           <p>
-            <strong>Valor:</strong>
-            R$ {{ totalAmount }}
+            <strong>Amount:</strong>
+            $ {{ totalAmount }}
           </p>
           <div v-if="isBoletoPayment" class="barcode">
             <div class="barcode-image"></div>
@@ -225,17 +225,17 @@ export default {
 }
 
 .boleto h3 {
-  font-size: 1.6rem; /* Font size for better readability */
-  font-weight: 700; /* Bolder font for emphasis */
-  color: #1a1a1a; /* Text color for contrast */
-  margin-bottom: 24px; /* Increase margin for better spacing */
-  padding: 12px 0; /* Add padding for space within the title */
-  text-align: center; /* Center align text */
-  text-transform: uppercase; /* Uppercase text for emphasis */
-  letter-spacing: 1px; /* Add letter spacing for legibility */
-  background-color: #e6e6e6; /* Light gray background for contrast */
-  border-radius: 8px; /* Rounded corners for a softer appearance */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+  padding: 12px 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: #e6e6e6;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .boleto p {
@@ -252,8 +252,8 @@ export default {
 }
 
 .barcode-image {
-  height: 40px; /* Increase the height for better visibility */
-  width: 500px; /* Set a width to ensure the barcode is visible */
+  height: 40px;
+  width: 500px;
   background: repeating-linear-gradient(
     90deg,
     #000,

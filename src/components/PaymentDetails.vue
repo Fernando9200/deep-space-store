@@ -1,6 +1,6 @@
 <template>
     <v-card>
-      <v-card-title>Informações de Pagamento</v-card-title>
+      <v-card-title>Payment Details</v-card-title>
       <v-card-text>
         <v-form ref="paymentForm" v-model="isFormValid" @submit.prevent="validateForm">
           <v-select
@@ -181,7 +181,7 @@
   <style scoped>
   .card-container {
     margin-top: 20px;
-    perspective: 1000px; /* Add perspective for 3D effect */
+    perspective: 1000px;
   }
   
   .card {
@@ -193,7 +193,7 @@
   }
   
   .card.flipped {
-    transform: rotateY(180deg); /* Flip the card */
+    transform: rotateY(180deg);
   }
   
   .card-front,
@@ -204,7 +204,7 @@
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: absolute;
-    backface-visibility: hidden; /* Hide backface during rotation */
+    backface-visibility: hidden;
   }
   
   .card-front.visa {
@@ -220,7 +220,7 @@
   .card-back {
     background: #333;
     color: white;
-    transform: rotateY(180deg); /* Position the back of the card */
+    transform: rotateY(180deg);
   }
   
   .card-number {
@@ -262,7 +262,6 @@
     letter-spacing: 2px;
   }
   
-  /* MasterCard Symbol */
   .card-front.mastercard::before {
     content: '';
     position: absolute;
@@ -277,77 +276,70 @@
   </style>
   
   <style scoped>
-/* Base styles for v-card */
 .v-card {
-  background-color: #f8f9fa; /* Light background for a soft look */
+  background-color: #f8f9fa;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  padding: 16px; /* Padding for breathing space */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  padding: 16px;
 }
 
-/* Styling for card title */
 .v-card-title {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333; /* Dark text for contrast */
-  border-bottom: 2px solid #eee; /* Bottom border for separation */
+  color: #333;
+  border-bottom: 2px solid #eee;
   padding-bottom: 8px;
-  margin-bottom: 16px; /* Margin for separation from text */
+  margin-bottom: 16px;
 }
 
-/* Styling for card text (form container) */
 .v-card-text {
   padding: 16px;
-  font-family: 'Roboto', sans-serif; /* Clean, modern font */
+  font-family: 'Roboto', sans-serif;
 }
 
-/* Styles for text fields */
 .v-text-field {
-  margin-bottom: 16px; /* Space between fields */
+  margin-bottom: 16px;
 }
 
-/* Styling for input labels */
 .v-input__slot::before,
 .v-label {
-  color: #555 !important; /* Subtle label color */
-  font-weight: 500; /* Medium font weight for emphasis */
+  color: #555 !important;
+  font-weight: 500;
 }
 
-/* Styling for buttons */
 .v-btn {
-  margin-right: 8px; /* Space between buttons */
-  background-color: #007bff; /* Primary blue color */
-  color: #fff; /* White text for contrast */
-  border-radius: 4px; /* Rounded corners for a softer look */
-  font-weight: bold; /* Bold text for emphasis */
-  transition: background-color 0.3s; /* Smooth transition on hover */
+  margin-right: 8px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
 .v-btn:disabled {
-  background-color: #aaa; /* Disabled button color */
-  color: #ddd; /* Light text for disabled state */
+  background-color: #aaa;
+  color: #ddd;
 }
 
 .v-btn:not(:disabled):hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
-/* Responsive styles */
 @media (max-width: 600px) {
   .v-card {
-    padding: 12px; /* Reduced padding for smaller screens */
+    padding: 12px;
   }
   .v-card-title {
-    font-size: 1.25rem; /* Smaller font for smaller screens */
+    font-size: 1.25rem;
   }
   .v-card-text {
-    padding: 12px; /* Reduced padding for smaller screens */
+    padding: 12px;
   }
   .v-text-field {
-    margin-bottom: 12px; /* Reduced margin for smaller screens */
+    margin-bottom: 12px;
   }
   .v-btn {
-    font-size: 0.9rem; /* Smaller font size for buttons */
+    font-size: 0.9rem;
   }
 }
 

@@ -2,7 +2,7 @@
   "items": [
     {
       "id": "ENT123",
-      "name": "Miniatura da Enterprise",
+      "name": "Miniature of the Enterprise",
       "price": 150,
       "images": [
         "/src/assets/Miniatura_Enterprise.png"
@@ -10,7 +10,7 @@
     },
     {
       "id": "SPC456",
-      "name": "Modelo do Ônibus Espacial",
+      "name": "Spaceship Model",
       "price": 200,
       "images": [
         "/src/assets/Modelo_Onibus_Espacial.png"
@@ -18,7 +18,7 @@
     },
     {
       "id": "ALN789",
-      "name": "Alien Figure",
+      "name": "Alien Figurine",
       "price": 160,
       "images": [
         "/src/assets/Alien_Figure.png"
@@ -30,14 +30,35 @@
     "Credit Card",
     "Pix"
   ],
-  "orders": [],
+  "orders": [
+    {
+      "orderId": "ORDER928457",
+      "userInfo": {
+        "userId": "USER755375",
+        "cpf": "121.527.229-89",
+        "email": "testaccount@hotmail.com",
+        "phoneNumber": "(27) 99778-6891",
+        "cep": "29172625",
+        "address": "Rua Natalino Ribeiro"
+      },
+      "paymentMethod": "Pix",
+      "status": "success",
+      "paymentDetails": {
+        "status": "Payment successful"
+      }
+    }
+  ],
   "users": [
     {
       "id": "USER755375",
       "fullName": "Test User",
       "email": "testaccount@hotmail.com",
       "password": "123456",
-      "purchases": []
+      "purchases": [
+        {
+          "orderId": "ORDER928457"
+        }
+      ]
     }
   ]
 }

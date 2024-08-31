@@ -1,6 +1,6 @@
 <template>
     <v-card>
-      <v-card-title>Dados do Comprador</v-card-title>
+      <v-card-title>Personal Details</v-card-title>
       <v-card-text>
         <v-form ref="personalForm" v-model="isFormValid" @submit.prevent="validateForm">
           <v-text-field
@@ -38,7 +38,7 @@
     name: 'PersonalDetails',
     data() {
       return {
-        isFormValid: false, // Para rastrear a validade do formulário
+        isFormValid: false,
       };
     },
     computed: {
@@ -46,7 +46,6 @@
       ...mapGetters(['stepIndex']),
     },
     mounted() {
-      // Preencher automaticamente os campos com os dados do usuário logado
       if (this.currentUser) {
         this.userData.fullName = this.currentUser.fullName;
         this.userData.email = this.currentUser.email;
@@ -55,32 +54,27 @@
     methods: {
       ...mapMutations(['nextStep', 'prevStep', 'setUserData']),
       validateFullName(value) {
-        // Validar se o nome completo contém pelo menos duas palavras
         const nameParts = value.trim().split(' ');
         return nameParts.length > 1 || 'Please enter your full name.';
       },
       validateEmail(value) {
-        // Padrão simples de regex para email
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailPattern.test(value) || 'Please enter a valid email address.';
       },
       validatePhoneNumber(value) {
-        // Regex para número de telefone brasileiro (11 dígitos)
         const phonePattern = /^\(\d{2}\) \d{5}-\d{4}$/;
         return phonePattern.test(value) || 'Please enter a valid Brazilian phone number.';
       },
       formatPhoneNumber() {
-        // Formatar automaticamente o número de telefone
-        let cleaned = this.userData.phoneNumber.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+        let cleaned = this.userData.phoneNumber.replace(/\D/g, '');
         if (cleaned.length > 2) {
-          // Formatar como (XX) XXXXX-XXXX
           cleaned = cleaned.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
         }
         this.userData.phoneNumber = cleaned;
       },
       validateForm() {
         if (this.$refs.personalForm.validate()) {
-          this.setUserData(this.userData); // Armazenar os dados do usuário no Vuex
+          this.setUserData(this.userData);
           this.nextStep();
         }
       },
@@ -95,77 +89,70 @@
   </script>
   
  <style scoped>
-/* Base styles for v-card */
 .v-card {
-  background-color: #f8f9fa; /* Light background for a soft look */
+  background-color: #f8f9fa;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  padding: 16px; /* Padding for breathing space */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
 }
 
-/* Styling for card title */
 .v-card-title {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333; /* Dark text for contrast */
-  border-bottom: 2px solid #eee; /* Bottom border for separation */
+  color: #333;
+  border-bottom: 2px solid #eee;
   padding-bottom: 8px;
-  margin-bottom: 16px; /* Margin for separation from text */
+  margin-bottom: 16px;
 }
 
-/* Styling for card text (form container) */
 .v-card-text {
   padding: 16px;
-  font-family: 'Roboto', sans-serif; /* Clean, modern font */
+  font-family: 'Roboto', sans-serif;
 }
 
-/* Styles for text fields */
 .v-text-field {
-  margin-bottom: 16px; /* Space between fields */
+  margin-bottom: 16px;
 }
 
-/* Styling for input labels */
 .v-input__slot::before,
 .v-label {
-  color: #555 !important; /* Subtle label color */
-  font-weight: 500; /* Medium font weight for emphasis */
+  color: #555 !important;
+  font-weight: 500;
 }
 
-/* Styling for buttons */
 .v-btn {
-  margin-right: 8px; /* Space between buttons */
-  background-color: #007bff; /* Primary blue color */
-  color: #fff; /* White text for contrast */
-  border-radius: 4px; /* Rounded corners for a softer look */
-  font-weight: bold; /* Bold text for emphasis */
-  transition: background-color 0.3s; /* Smooth transition on hover */
+  margin-right: 8px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
 .v-btn:disabled {
-  background-color: #aaa; /* Disabled button color */
-  color: #ddd; /* Light text for disabled state */
+  background-color: #aaa;
+  color: #ddd;
 }
 
 .v-btn:not(:disabled):hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
-/* Responsive styles */
 @media (max-width: 600px) {
   .v-card {
-    padding: 12px; /* Reduced padding for smaller screens */
+    padding: 12px;
   }
   .v-card-title {
-    font-size: 1.25rem; /* Smaller font for smaller screens */
+    font-size: 1.25rem;
   }
   .v-card-text {
-    padding: 12px; /* Reduced padding for smaller screens */
+    padding: 12px;
   }
   .v-text-field {
-    margin-bottom: 12px; /* Reduced margin for smaller screens */
+    margin-bottom: 12px;
   }
   .v-btn {
-    font-size: 0.9rem; /* Smaller font size for buttons */
+    font-size: 0.9rem;
   }
 }
 
