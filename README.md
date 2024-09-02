@@ -1,6 +1,6 @@
 # Deep Space Store
 
-![image](https://github.com/user-attachments/assets/a072ea81-697f-406d-a5da-f98163109b1c)
+![deep-space-store](https://github.com/user-attachments/assets/561c3aad-6e25-45bc-87b5-1baad573df77)
 
 ## Project Description
 
