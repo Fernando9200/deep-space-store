@@ -1,12 +1,6 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 
-const isLocal = window.location.hostname === 'localhost';
-
-const apiUrl = isLocal
-  ? 'http://localhost:3001' // Local json-server URL
-  : '/mockData.json';        // Path to the static JSON file
-
 export default createStore({
   state: {
     cart: [],
@@ -112,22 +106,16 @@ export default createStore({
   actions: {
     async fetchItems({ commit }) {
       try {
-        const response = isLocal
-          ? await axios.get(`${apiUrl}/items`)
-          : await axios.get(apiUrl);
-        const items = isLocal ? response.data : response.data.items;
-        commit('setItems', items);
+        const response = await axios.get('http://localhost:3001/items');
+        commit('setItems', response.data);
       } catch (error) {
         console.error('Error fetching items:', error);
       }
     },
     async fetchItem({ commit }, itemId) {
       try {
-        const response = isLocal
-          ? await axios.get(`${apiUrl}/items/${itemId}`)
-          : await axios.get(apiUrl);
-        const item = isLocal ? response.data : response.data.items.find(item => item.id === itemId);
-        commit('setItem', item);
+        const response = await axios.get(`http://localhost:3001/items/${itemId}`);
+        commit('setItem', response.data);
       } catch (error) {
         console.error('Error fetching item:', error);
         commit('setItem', {});
@@ -135,11 +123,8 @@ export default createStore({
     },
     async fetchPaymentMethods({ commit }) {
       try {
-        const response = isLocal
-          ? await axios.get(`${apiUrl}/paymentMethods`)
-          : await axios.get(apiUrl);
-        const paymentMethods = isLocal ? response.data : response.data.paymentMethods;
-        commit('setPaymentMethods', paymentMethods);
+        const response = await axios.get('http://localhost:3001/paymentMethods');
+        commit('setPaymentMethods', response.data);
       } catch (error) {
         console.error('Error fetching payment methods:', error);
       }
@@ -152,12 +137,10 @@ export default createStore({
       const userId = state.currentUser.id;
 
       try {
-        const response = isLocal
-          ? await axios.post(`${apiUrl}/users/${userId}/orders`, {
-              ...state.userData,
-              ...orderData
-            })
-          : { data: { status: 'success' } }; // Mock response when not using local server
+        const response = await axios.post(`http://localhost:3001/users/${userId}/orders`, {
+          ...state.userData,
+          ...orderData
+        });
         commit('setOrder', response.data);
         return response.data;
       } catch (error) {
@@ -167,9 +150,7 @@ export default createStore({
     },
     async loginUser({ commit }, userData) {
       try {
-        const response = isLocal
-          ? await axios.post(`${apiUrl}/users/login`, userData)
-          : { data: { userId: 'USER123', fullName: 'Mock User', email: userData.email } }; // Mock response when not using local server
+        const response = await axios.post('http://localhost:3001/users/login', userData);
         commit('setCurrentUser', { id: response.data.userId, fullName: response.data.fullName, email: response.data.email });
         return response.data;
       } catch (error) {
@@ -179,10 +160,8 @@ export default createStore({
     },
     async registerUser({ commit }, userData) {
       try {
-        const response = isLocal
-          ? await axios.post(`${apiUrl}/users/register`, userData)
-          : { data: { userId: 'USER123' } }; // Mock response when not using local server
-        commit('setCurrentUser', { id: response.data.userId, fullName: userData.fullName, email: userData.email });
+        const response = await axios.post('http://localhost:3001/users/register', userData);
+        commit('setCurrentUser', { id: response.data.userId, fullName: userData.fullName, email: response.data.email });
         return response.data;
       } catch (error) {
         console.error('Error registering user:', error);
@@ -194,11 +173,8 @@ export default createStore({
     },
     async fetchGlobalOrders({ commit }) {
       try {
-        const response = isLocal
-          ? await axios.get(`${apiUrl}/orders`)
-          : await axios.get(apiUrl);
-        const orders = isLocal ? response.data : response.data.orders;
-        commit('setGlobalOrders', orders);
+        const response = await axios.get('http://localhost:3001/orders');
+        commit('setGlobalOrders', response.data);
       } catch (error) {
         console.error('Error fetching global orders:', error);
       }
