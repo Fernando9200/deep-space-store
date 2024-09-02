@@ -2,107 +2,108 @@
 
 ![image](https://github.com/user-attachments/assets/a072ea81-697f-406d-a5da-f98163109b1c)
 
+## Project Description
 
+Deep Space Store is an application that emulates an e-commerce platform. This project was developed using Vue.js for the frontend and `json-server` to simulate a backend. It includes features like user registration, login, adding products to the cart, and completing purchases with different payment methods.
 
-
-## Descrição do Projeto
-
-Deep Space Store é uma aplicação que emula um e-coomerce. Este projeto foi desenvolvido usando Vue.js para o frontend e `json-server` para simular um backend. Ele inclui funcionalidades como registro de usuários, login, adição de produtos ao carrinho, e finalização de compras com diferentes métodos de pagamento.
-
-## Tecnologias Utilizadas
+## Technologies Used
 
 - **Frontend:** Vue.js, Vuetify
 - **Backend:** json-server
-- **Gerenciamento de Estado:** Vuex
-- **Testes:** Cypress, Mocha
-- **Contêineres:** Docker
-- **Outros:** Axios, ESLint
+- **State Management:** Vuex
+- **Testing:** Cypress, Mocha
+- **Containers:** Docker
+- **Others:** Axios, ESLint
 
-## Funcionalidades Principais
+## Main Features
 
-- Registro e autenticação de usuários
-- Adição e remoção de produtos no carrinho
-- Finalização de compra com confirmação de pedido
-- Diferentes métodos de pagamento, incluindo Pix, Boleto e Cartão de Crédito
+- User registration and authentication
+- Adding and removing products in the cart
+- Completing a purchase with order confirmation
+- Different payment methods, including Pix, Boleto, and Credit Card
 
-## Vídeo de Demonstração
+## Demo Video
 
-[Vídeo de Demonstração](https://github.com/user-attachments/assets/56b8a245-c179-4b31-a8e0-32a13d2bb5e7)
+https://github.com/user-attachments/assets/a3070bfe-70b0-4cec-b09d-59f8480baa6c
 
-## Como Rodar o Projeto
+## How to Run the Project
 
-### Pré-requisitos
+### Prerequisites
 
-- **Node.js** (versão 14 ou superior)
-- **Docker** (opcional, para rodar a aplicação em contêineres)
+- **Node.js** (version 14 or higher)
+- **Docker** (optional, to run the application in containers)
 
-### Passos para Rodar o Projeto Localmente
+### Steps to Run the Project Locally
 
-1. **Clone o repositório:**
+1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/Fernando9200/deep-space-store.git
    cd deep-space-store
+   ```
 
-2. **Instale as dependências**
+2. **Install the dependencies:**
 
    ```bash
    npm install
+   ```
 
-3. **Inicie o servidor JSON:**
+3. **Start the JSON server:**
    
-   Em uma aba do terminal, execute:
+   In one terminal tab, run:
    ```bash
    npm run mock-server
+   ```
 
-4. **Inicie o servidor de desenvolvimento Vue:**
+4. **Start the Vue development server:**
 
-   Em outra aba do terminal, execute:
+   In another terminal tab, run:
    ```bash
    npm run serve
+   ```
 
-5. **Acesse a aplicação:**  
-   Abra o navegador e vá para `http://localhost:8080`
+5. **Access the application:**  
+   Open your browser and go to `http://localhost:8080`
 
-6. **Para facilitar o teste do aplicativo, você pode usar a conta de teste abaixo:**
+6. **To facilitate testing the application, you can use the test account below:**
 
 - **Email:** `testaccount@hotmail.com`
-- **Senha:** `123456`
+- **Password:** `123456`
    
-   Se preferir, pode registrar a sua própria conta, que ficará salva no `db.json`
+   If you prefer, you can register your own account, which will be saved in `db.json`
 
-## Rodando com Docker  
+## Running with Docker  
 
-Caso prefira, é possível rodar a aplicação utilizando Docker.
+If you prefer, you can run the application using Docker.
 
-**Construir e rodar a aplicação:**
+**Build and run the application:**
 
 ```bash
 docker-compose up --build
 ```
 
-## Testes
+## Testing
 
-O projeto utiliza Cypress para testes de ponta a ponta e Mocha para testes unitários. Abaixo estão as instruções para rodar cada um dos conjuntos de testes.
+The project uses Cypress for end-to-end testing and Mocha for unit testing. Below are the instructions to run each set of tests.
 
-1. **Certifique-se de que o aplicativo está rodando**
+1. **Ensure the application is running**
 
-2. **Execute os testes Cypress:**
+2. **Run the Cypress tests:**
 
    ```bash
    npx cypress run
    ```
-3. **Execute os testes unitários:**
+3. **Run the unit tests:**
 
    ```bash
    npm test
    ```
 
-4. **Para rodar os testes unitários dentro do contêiner:**
+4. **To run the unit tests inside the container:**
 
    ```bash
    docker exec -it deep-space-store npm run test
    ```
 
-## Contato
-Para dúvidas ou suporte, por favor entre em contato com `fernando91.sosa@hotmail.com`
+## Contact
+For questions or support, please contact `fernando91.sosa@hotmail.com`
